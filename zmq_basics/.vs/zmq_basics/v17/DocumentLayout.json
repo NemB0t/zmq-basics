@@ -1,0 +1,41 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Experimental\\zmq-learning\\Project\\zmq_basics\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{98A56832-ADBB-4B93-AE70-DB35F7E76213}|zmq_basics.vcxproj|C:\\Experimental\\zmq-learning\\Project\\zmq_basics\\zmq_basics.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{98A56832-ADBB-4B93-AE70-DB35F7E76213}|zmq_basics.vcxproj|solutionrelative:zmq_basics.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "zmq_basics.cpp",
+              "DocumentMoniker": "C:\\Experimental\\zmq-learning\\Project\\zmq_basics\\zmq_basics.cpp",
+              "RelativeDocumentMoniker": "zmq_basics.cpp",
+              "ToolTip": "C:\\Experimental\\zmq-learning\\Project\\zmq_basics\\zmq_basics.cpp",
+              "RelativeToolTip": "zmq_basics.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-07-05T16:14:56.296Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
