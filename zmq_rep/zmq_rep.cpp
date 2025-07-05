@@ -2,7 +2,7 @@
 //
 
 #include <iostream>
-
+#include <nlohmann/json.hpp>
 #include <zmq_addon.hpp>
 
 static zmq::context_t ctx;
@@ -18,26 +18,23 @@ int main()
 		zmq::message_t z_in;
 		sock.recv(z_in);
 
-		int x = std::stoi(z_in.to_string());
-		x = x * x;
+		auto jmsg_in = nlohmann::json::parse(z_in.to_string());
+		int x = jmsg_in["randint"];
+		std::string thread_id = jmsg_in["thread_id"];
+
+		nlohmann::json jmsg_out;
+		jmsg_out["result"] = x * x;
+		jmsg_out["server"] = true;
 		
-		std::string msg_out = std::to_string(x);
-		zmq::message_t z_out(msg_out);
+		zmq::message_t z_out(jmsg_out.dump());
 
 		sock.send(z_out, zmq::send_flags::none);
 		std::cout
-			<< "sending: " << msg_out << std::endl;
+			<< "sending: " << jmsg_out.dump() << std::endl;
 
 	}
+	sock.close();
+	ctx.close();
+
+	std::cout << "\n sockets closed and context destroyed";
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file

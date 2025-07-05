@@ -2,6 +2,7 @@
 #include <thread>
 #include <random>
 #include <chrono>
+#include <nlohmann/json.hpp>
 #include <zmq_addon.hpp>
 
 using namespace std::chrono_literals;
@@ -18,18 +19,24 @@ auto func = [](std::string thread_id){
 
 	while(1)
 	{
-		std::string msg_out = std::to_string(udist(mt));
-		zmq::message_t z_out(msg_out);
+		nlohmann::json jmsg;
+		jmsg["randint"] = udist(mt);
+		jmsg["thread_id"] = thread_id;
+		
+		zmq::message_t z_out(jmsg.dump());
 		sock.send(z_out, zmq::send_flags::none);
 
 		zmq::message_t z_in;
 		sock.recv(z_in);
 		std::cout
 			<< "\n thread_id: " << thread_id
-			<< " sending: " << msg_out
+			<< " sending: " << jmsg.dump()
 			<< " received: " << z_in.to_string();
 		std::this_thread::sleep_for(500ms);
 	}
+	sock.close();
+	ctx.close();
+	std::cout << "\n sockets closed and context destroyed";
 
 };
 
