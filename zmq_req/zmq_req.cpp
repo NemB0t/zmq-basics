@@ -8,8 +8,7 @@ using namespace std::chrono_literals;
 
 static zmq::context_t ctx;
 
-int main()
-{
+auto func = [](std::string thread_id){
 	zmq::socket_t sock(ctx, zmq::socket_type::req);
 	sock.connect("tcp://127.0.0.1:5555");
 
@@ -26,8 +25,19 @@ int main()
 		zmq::message_t z_in;
 		sock.recv(z_in);
 		std::cout
-			<< "\nsending: " << msg_out
+			<< "\n thread_id: " << thread_id
+			<< " sending: " << msg_out
 			<< " received: " << z_in.to_string();
-		std::this_thread::sleep_for(100ms);
+		std::this_thread::sleep_for(500ms);
 	}
+
+};
+
+int main()
+{
+	std::thread th0 = std::thread(func, "thread_0");
+	std::thread th1 = std::thread(func, "thread_1");
+
+	th0.join();
+	th1.join();
 }
